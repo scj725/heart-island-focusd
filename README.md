@@ -1,131 +1,211 @@
-<div align="center">
-  <img src="src-tauri/icons/128x128.png" alt="FocuSD Island Logo" width="96" height="96">
+# 心岛 FocuSD
 
-  <h1>FocuSD Island</h1>
+一个 Windows 桌面顶部的沉浸式效率灵动岛。它以透明、无边框、始终置顶的悬浮岛形式工作：平时收起，只保留当前重要信息；点击后展开，集中处理待办、专注、音乐歌词、剪贴板、接口消息和外观设置。
 
-  <p>
-    一款 Windows 灵动岛效率工具，把待办、每日笔记、Codex 状态指示灯、剪切板历史和媒体控制放在屏幕顶部，现已支持毛玻璃风格
-  </p>
+> 本项目基于开源项目 [FocuSD](https://github.com/zzliu93-debug/FocuSD) 的 MIT 许可证代码进行修改与重构。
 
-  <p>
-    <a href="https://github.com/zzliu93-debug/FocuSD/releases/latest">下载 Release</a>
-    ·
-    <a href="https://github.com/zzliu93-debug/FocuSD/issues">反馈 Issue</a>
-    ·
-    <a href="https://github.com/zzliu93-debug/FocuSD/stargazers">GitHub Stars</a>
-  </p>
+## 下载与安装
 
-  <p>
-    <img alt="Version" src="https://img.shields.io/badge/version-0.2.3-blue">
-    <img alt="Platform" src="https://img.shields.io/badge/platform-Windows-0078D4">
-    <img alt="Tauri" src="https://img.shields.io/badge/Tauri-2-24C8DB">
-    <img alt="React" src="https://img.shields.io/badge/React-19-61DAFB">
-    <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6">
-    <a href="https://github.com/zzliu93-debug/FocuSD/stargazers"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/zzliu93-debug/FocuSD?style=flat"></a>
-  </p>
-</div>
+前往 [v1.0.0 发布页](https://github.com/scj725/heart-island-focusd/releases/tag/v1.0.0) 下载最新版。
 
-## 关于项目
+- 推荐下载 `.exe` 安装程序，双击后按提示安装。
+- `.msi` 安装包适合企业部署、静默安装或系统统一管理。
+- 首次启动后，灵动岛会显示在屏幕顶部；可在设置中调整开机自启、外观、宽度与数据保存位置。
 
-FocuSD Island 是一个 Windows 桌面悬浮效率工具。它以透明、无边框、始终置顶的小岛形式停靠在屏幕顶部，平时保持紧凑，需要时展开处理待办、笔记、剪切板和媒体控制。
+## 功能概览
 
-它的目标不是模拟一个装饰性的灵动岛，而是把容易打断注意力的常用入口集中起来，并让你不切回终端也能看到 Codex 任务状态。项目目前优先适配 Windows。
-
-## 核心功能
-
-| 功能 | 说明 |
+| 模块 | 功能 |
 | --- | --- |
-| 悬浮岛 | 透明、无边框、始终置顶，支持折叠、边缘收起和托盘隐藏。 |
-| 待办与笔记 | 管理今日任务、专注任务和每日笔记，支持拖动排序、跨天延续与归档。 |
-| Markdown 保存 | 将每日内容保存为本地 `YYYY-MM-DD.md`。 |
-| Codex 状态 | 显示任务正在运行、已完成、失败或可能中断。 |
-| 剪切板历史 | 记录文本和图片，支持备注、搜索、收藏和复制。 |
-| 媒体与外观 | 控制系统媒体，并提供经典与液态玻璃外观设置。 |
+| 收起态 | 默认 `❤` 标识、可调宽度、金句、正在播放的歌曲或歌词、接口消息优先展示 |
+| 待办与专注 | 当日待办增删改查、当前专注任务、专注倒计时、完成提醒、每日记录和历史归档 |
+| 音乐与歌词 | Windows 系统媒体控制、上一首/播放暂停/下一首、在线歌词与逐行滚动 |
+| 剪贴板 | 文本和图片历史、收藏、备注、最大条数设置、`Alt+Z` 快捷打开、可选自动粘贴回原窗口 |
+| 接口扩展 | 本地 HTTP 消息接口、文字/图片/视频/语音卡片、搜索、筛选、固定、删除与历史回看 |
+| 通知规则 | 按消息类型控制是否上岛、高优先级自动展开、停留时长设置 |
+| 外观 | 内置主题、自定义预设、液态玻璃、动效强度、展开速度、高光、阴影和圆角 |
+| 数据 | JSON 导入导出、Markdown 保存当日待办和每日记录、系统托盘与开机自启 |
 
-## Codex 状态指示灯
+## 收起态与顶部入口
 
-FocuSD 可以通过 Codex hooks 显示 AI 编程任务的运行状态。在 **设置 → AI Agent 状态灯** 中点击 **安装/修复** 即可配置。
+- 默认岛屿标识为 `❤`，可替换文字或关闭显示。
+- 默认收起宽度为 320 像素，可在设置中调整。
+- 未播放媒体时，默认显示：`心有山海，步履从容，自有风来。`
+- 音乐播放时，可优先显示歌曲或当前歌词；接口消息到达时优先显示消息，图片消息会带缩略图。
+- 长文本会在岛内截断或滚动，不会溢出到灵动岛外。
 
-> [!IMPORTANT]
-> **Codex 状态灯不亮时，必须在 Codex 中信任 FocuSD hook。** 新版 Codex 会跳过未经审核和信任的命令 hook；仅在 FocuSD 中点击“安装/修复”还不够。
+展开后的顶部圆点入口：
 
-安装后请在 Codex 的 **设置 → Hooks**（CLI 使用 `/hooks`）中找到两条 **Updating FocuSD agent status**，审核并信任，然后重启 Codex。
+- 蓝色：待办与每日记录。
+- 紫色：系统媒体与歌词。
+- 黄色：剪贴板历史。
+- 粉色：接口扩展消息中心。
+- 灰色：布局、外观和各项设置。
 
-## 快速开始
+## 待办、每日记录与专注
 
-FocuSD Island 支持两种使用方式：直接下载 Release，或者通过源码自行构建。
+- 新增、编辑、完成和删除当天待办。
+- 选择当前专注任务并启动倒计时；结束时显示提示，系统允许时发送 Windows 提醒。
+- 可设置专注时长、拖动排序，以及未完成任务是否带入下一天。
+- 支持每日记录、历史归档和卡片/时间线浏览。
+- 设置 Markdown 保存目录后，可把当天待办和每日记录写入本地文件。
 
-### 方式一：通过 Release 安装
+## 音乐与歌词
 
-适合只想直接使用应用的用户。
+- 读取 Windows 系统媒体会话，显示歌曲名、作者、播放状态和当前播放时间。
+- 支持上一首、播放/暂停、下一首。
+- 自动获取在线歌词，按播放时间逐行滚动并高亮当前歌词。
+- 可在设置中关闭歌词显示。
 
-1. 打开本仓库的 [GitHub Releases](https://github.com/zzliu93-debug/FocuSD/releases/latest) 页面。
-2. 下载最新版本的 Windows 安装包。
-3. 推荐优先下载 `FocuSD Island_版本号_x64-setup.exe`。
-4. 双击安装包，按提示完成安装。
-5. 首次启动后，可在设置中配置 Markdown 保存目录、开机自启动、Codex 状态指示灯、剪切板历史和样式预设。
+系统媒体接口没有稳定提供歌曲总时长，因此当前只显示准确的播放时间，不提供不可靠的拖动进度条。
 
-如果 Release 页面暂时没有安装包，可以使用下面的源码构建方式。
+## 剪贴板历史
 
-### 方式二：通过源码构建
+- 记录文本与图片内容，可收藏、备注、复制或删除。
+- 支持设置是否记录图片、最大保存条数。
+- 默认快捷键为 `Alt+Z`，可以在设置中重新录制。
+- 开启“选择后自动粘贴回原窗口”后，使用快捷键打开历史、点选条目，会复制内容、恢复原输入窗口并模拟粘贴。
 
-需要 Windows 10/11、Node.js、pnpm、Rust、Visual Studio C++ Build Tools 和 WebView2 Runtime。
+## 接口扩展
 
-```powershell
-git clone https://github.com/zzliu93-debug/FocuSD.git
-cd FocuSD
-pnpm install
-pnpm tauri build
+本机接口地址：`http://127.0.0.1:47821`
+
+支持 `text`、`image`、`video`、`voice` 四种消息。请求示例：
+
+```json
+{
+  "type": "image",
+  "title": "图片提醒",
+  "content": "点击查看详情",
+  "url": "https://example.com/image.png",
+  "actionUrl": "https://example.com",
+  "duration": 12,
+  "priority": "normal"
+}
 ```
 
-开发模式：
+字段说明：
+
+- `title`：标题，最多 80 个字符。
+- `content`：正文，最多 2000 个字符。
+- `url`：图片、视频或语音地址；图片支持 `data:image/...`。
+- `actionUrl`：详情页中的跳转链接，仅支持 HTTP/HTTPS。
+- `duration`：收起态显示秒数，范围 3 到 60。
+- `priority`：`normal` 或 `high`；高优先级可按通知规则自动展开详情。
+
+接口消息中心保存最近 20 条记录，应用重启后仍可回看。支持标题/正文/来源搜索、按消息类型筛选、固定重要消息、删除当前消息和一键清空。图片、视频、语音和跳转链接都可在详情页使用。
+
+接口仅监听 `127.0.0.1`，其他设备不能直接访问。请不要通过接口发送密码、令牌、身份证号等敏感数据。
+
+## Windows 通知与通知规则
+
+应用可读取 Windows 通知中心中已授权的通知来源。只有真正进入 Windows 通知中心的消息才能被读取；某些软件未发送 Windows 通知或关闭了通知时，无法通过此能力获取内容。
+
+设置页中的“通知规则”可配置：
+
+- 哪些接口消息类型允许上岛。
+- 高优先级消息是否自动展开。
+- 接口消息在收起态的停留秒数，范围 3 到 60。
+
+关闭某一类型后，该类型的新接口消息不会进入岛屿或接口历史。
+
+## 外观、预设与动效材质
+
+内置主题：
+
+- 沉浸夜航：深色液态玻璃与红色点缀。
+- 清透玻璃：高透明度、蓝色高光。
+- 专注红心：经典深色、红色爱心标识和金句优先。
+
+可保存当前设置为自定义预设、重命名、应用和删除。内置主题不可删除。
+
+可调节项目包括：
+
+- 经典/液态玻璃外观、玻璃强度、整体不透明度。
+- 动效强度和展开速度。
+- 边缘高光、阴影深度、展开圆角。
+- 亮点颜色、岛屿背景、待办纸张颜色。
+
+这些设置会随预设保存，也会包含在数据备份中。系统开启“减少动态效果”时，应用会关闭非必要的呼吸动画。
+
+## 数据备份与隐私
+
+设置页支持 JSON 导出和导入，包含：
+
+- 外观与通知规则。
+- 自定义预设。
+- 待办、每日记录和历史归档。
+- 接口消息记录。
+- 剪贴板设置。
+
+导入会覆盖备份中包含的对应数据。导入前建议先导出当前数据，留存回退副本。
+
+数据默认保存在本机。可拖动岛屿位置、贴边收起、恢复默认位置、最小化到系统托盘，并设置开机自动启动。
+
+## 本地开发
+
+### 环境要求
+
+- Windows 10 或 Windows 11
+- Node.js 与 pnpm
+- Rust stable 工具链
+- Visual Studio C++ Build Tools
+- Microsoft Edge WebView2 Runtime
+
+### 安装与启动
 
 ```powershell
+git clone https://github.com/scj725/heart-island-focusd.git
+cd heart-island-focusd
+pnpm install
 pnpm tauri dev
 ```
 
-## 使用说明
+仅启动前端页面：
 
-### 待办与每日笔记
-
-- 在展开面板中添加今日待办，并将最重要的一条设为当前专注任务。
-- 每日笔记适合记录当天补充信息、临时想法或任务背景。
-- 跨天后，上一天内容会进入归档，方便回顾。
-- 如需本地保存，可在设置中选择 Markdown 保存目录。
-
-默认 Todo 保存路径为：
-
-```text
-%USERPROFILE%\Documents\FocuSD
+```powershell
+pnpm dev
 ```
 
-### 剪切板
+前端构建检查：
 
-- 开启剪切板历史后，应用会记录文本和图片剪切板内容。
-- 每条记录都可以添加备注，并通过内容或备注搜索。
-- 每条记录支持收藏、复制、删除。
-- 收藏内容会保留在收藏栏目中，适合保存高频片段。
+```powershell
+pnpm build
+```
 
-### Codex 状态
+生成完整 Windows 安装包：
 
-- 在设置中安装或修复 Codex hooks。
-- 状态文件位于 `%APPDATA%\com.focusd.island\agent-status.json`。
-- 指示灯会根据 Codex 运行、完成、失败或超时状态变化。
+```powershell
+pnpm tauri build
+```
 
-### 外观与液态玻璃
+只生成 release 可执行文件：
 
-- 在设置中可切换“经典”与“液态玻璃”主题，并调节玻璃强度。
-- 液态玻璃在 Windows 10 1809+/Windows 11 上优先使用 Acrylic 背景采样；系统不支持或关闭透明效果时自动降级为可读的 CSS 玻璃。
-- 经典主题保留原有背景色与透明度行为；旧设置和旧预设会保持经典主题，避免升级后改变已有外观。
+```powershell
+pnpm tauri build --no-bundle
+```
 
-## 数据与存储
+构建完成后，安装包通常位于：
 
-待办、笔记、归档和外观设置保存在本机。配置保存目录后，每日内容可写入 `YYYY-MM-DD.md`；剪切板历史和 Codex 状态保存在应用数据目录。
+```text
+src-tauri/target/release/bundle/nsis/
+src-tauri/target/release/bundle/msi/
+```
 
-## 参与贡献
+## 发布到 GitHub
 
-欢迎提交 [Issue](https://github.com/zzliu93-debug/FocuSD/issues) 和 Pull Request。反馈问题时请附上系统版本、应用版本、复现步骤和截图或录屏；提交 PR 时请说明改动内容和验证命令。
+首次发布时，在 GitHub 创建空仓库后执行：
 
-## 许可证
+```powershell
+git add .
+git commit -m "feat: 发布心岛 FocuSD v1.0.0"
+git remote set-url origin https://github.com/scj725/heart-island-focusd.git
+git push -u origin main
+```
 
-当前仓库暂未声明开源许可证。
+然后在 GitHub 的 Releases 页面创建标签 `v1.0.0`，上传 `.exe` 和 `.msi` 安装包。
+
+仓库的 `.gitignore` 已排除 `node_modules/`、`dist/`、`src-tauri/target/` 和 `src-tauri/target-package/`，因此可以直接使用 `git add .`。
+
+## 许可证与致谢
+
+本项目基于 [FocuSD](https://github.com/zzliu93-debug/FocuSD) 的 MIT 许可证代码进行修改与重构。发布、分发或继续修改时，请保留原项目的 MIT 许可证与版权声明。
