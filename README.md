@@ -9,7 +9,6 @@
 前往 [v1.0.0 发布页](https://github.com/scj725/heart-island-focusd/releases/tag/v1.0.0) 下载最新版。
 
 - 推荐下载 `.exe` 安装程序，双击后按提示安装。
-- `.msi` 安装包适合企业部署、静默安装或系统统一管理。
 - 首次启动后，灵动岛会显示在屏幕顶部；可在设置中调整开机自启、外观、宽度与数据保存位置。
 
 ## 功能概览
@@ -190,21 +189,6 @@ pnpm tauri build --no-bundle
 src-tauri/target/release/bundle/nsis/
 src-tauri/target/release/bundle/msi/
 ```
-
-## 发布到 GitHub
-
-首次发布时，在 GitHub 创建空仓库后执行：
-
-```powershell
-git add .
-git commit -m "feat: 发布心岛 FocuSD v1.0.0"
-git remote set-url origin https://github.com/scj725/heart-island-focusd.git
-git push -u origin main
-```
-
-然后在 GitHub 的 Releases 页面创建标签 `v1.0.0`，上传 `.exe` 和 `.msi` 安装包。
-
-仓库的 `.gitignore` 已排除 `node_modules/`、`dist/`、`src-tauri/target/` 和 `src-tauri/target-package/`，因此可以直接使用 `git add .`。
 
 ## 许可证与致谢
 
